@@ -3,5 +3,4 @@
 *.json
 output/
 venv
-
-*.env
+.env
