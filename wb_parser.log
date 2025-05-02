@@ -1,0 +1,333 @@
+2025-05-02 21:35:30,333 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:35:30,544 - WARNING - Updates were skipped successfully.
+2025-05-02 21:35:30,544 - INFO - Bot starting up...
+2025-05-02 21:35:30,638 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:35:30,640 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:35:30,641 - INFO - Scheduler started
+2025-05-02 21:35:30,642 - INFO - Running job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:02:00], next run at: 2025-05-02 21:37:30 +05)" (scheduled at 2025-05-02 21:35:30.544097+05:00)
+2025-05-02 21:35:30,654 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:35:31,070 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:35:33,357 - INFO - Data saved to categories.json
+2025-05-02 21:35:33,951 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:35:33,953 - INFO - Job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:02:00], next run at: 2025-05-02 21:37:30 +05)" executed successfully
+2025-05-02 21:35:33,956 - INFO - Start polling.
+2025-05-02 21:35:37,320 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:35:37,481 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:35:38,243 - INFO - Data saved to categories.json
+2025-05-02 21:35:38,789 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:37:30,546 - INFO - Running job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:02:00], next run at: 2025-05-02 21:39:30 +05)" (scheduled at 2025-05-02 21:37:30.544097+05:00)
+2025-05-02 21:37:30,548 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:37:30,708 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:37:31,801 - INFO - Data saved to categories.json
+2025-05-02 21:37:32,484 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:37:32,488 - INFO - Job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:02:00], next run at: 2025-05-02 21:39:30 +05)" executed successfully
+2025-05-02 21:37:36,532 - INFO - Bot shutting down...
+2025-05-02 21:37:36,547 - INFO - Scheduler has been shut down
+2025-05-02 21:37:36,548 - INFO - Stop polling...
+2025-05-02 21:37:36,549 - WARNING - Goodbye!
+2025-05-02 21:41:17,351 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:41:17,569 - WARNING - Updates were skipped successfully.
+2025-05-02 21:41:17,569 - INFO - Bot starting up...
+2025-05-02 21:41:17,664 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:41:17,667 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:41:17,667 - INFO - Scheduler started
+2025-05-02 21:41:17,809 - INFO - Start polling.
+2025-05-02 21:41:26,094 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:41:26,471 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:41:27,675 - INFO - Data saved to categories.json
+2025-05-02 21:41:28,218 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:41:46,137 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:41:46,314 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:41:47,923 - INFO - Data saved to categories.json
+2025-05-02 21:41:48,416 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:42:56,384 - INFO - Bot shutting down...
+2025-05-02 21:42:56,409 - INFO - Scheduler has been shut down
+2025-05-02 21:42:56,411 - INFO - Stop polling...
+2025-05-02 21:42:56,411 - WARNING - Goodbye!
+2025-05-02 21:43:01,140 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:43:01,351 - WARNING - Updates were skipped successfully.
+2025-05-02 21:43:01,351 - INFO - Bot starting up...
+2025-05-02 21:43:01,465 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:43:01,468 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:43:01,468 - INFO - Scheduler started
+2025-05-02 21:43:01,606 - INFO - Start polling.
+2025-05-02 21:43:20,269 - WARNING - No users to send status to.
+2025-05-02 21:43:20,269 - WARNING - No users to send status to.
+2025-05-02 21:43:20,270 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:43:20,718 - WARNING - No users to send status to.
+2025-05-02 21:43:20,720 - WARNING - No users to send status to.
+2025-05-02 21:43:20,720 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:43:21,874 - INFO - Data saved to categories.json
+2025-05-02 21:43:21,874 - WARNING - No users to send status to.
+2025-05-02 21:43:21,875 - WARNING - No users to send status to.
+2025-05-02 21:43:22,437 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:43:22,438 - WARNING - No users to send status to.
+2025-05-02 21:43:46,618 - INFO - Bot shutting down...
+2025-05-02 21:43:46,619 - INFO - Scheduler has been shut down
+2025-05-02 21:43:46,619 - INFO - Stop polling...
+2025-05-02 21:43:46,619 - WARNING - Goodbye!
+2025-05-02 21:45:57,988 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:45:58,228 - WARNING - Updates were skipped successfully.
+2025-05-02 21:45:58,228 - INFO - Bot starting up...
+2025-05-02 21:45:58,329 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:45:58,331 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:45:58,331 - INFO - Scheduler started
+2025-05-02 21:45:58,659 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 21:45:58,659 - INFO - Start polling.
+2025-05-02 21:46:10,246 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:10,544 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:10,846 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:46:11,562 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:11,887 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:12,064 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:46:13,353 - INFO - Data saved to categories.json
+2025-05-02 21:46:13,540 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:13,868 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:14,540 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:46:14,715 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:15,235 - ERROR - Failed to send Excel to user 123456789: Chat not found
+2025-05-02 21:46:15,471 - INFO - Excel report sent to user 6089511983
+2025-05-02 21:46:48,772 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:49,339 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:49,587 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 21:46:49,932 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:50,299 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:50,604 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 21:46:52,703 - INFO - Data saved to categories.json
+2025-05-02 21:46:52,929 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:53,461 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:54,581 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 21:46:54,761 - ERROR - Failed to send status to user 123456789: Chat not found
+2025-05-02 21:46:55,231 - ERROR - Failed to send Excel to user 123456789: Chat not found
+2025-05-02 21:46:55,424 - INFO - Excel report sent to user 6089511983
+2025-05-02 21:52:42,092 - INFO - Bot shutting down...
+2025-05-02 21:52:42,093 - INFO - Scheduler has been shut down
+2025-05-02 21:52:42,096 - INFO - Stop polling...
+2025-05-02 21:52:42,098 - WARNING - Goodbye!
+2025-05-02 21:52:48,089 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:52:48,303 - WARNING - Updates were skipped successfully.
+2025-05-02 21:52:48,303 - INFO - Bot starting up...
+2025-05-02 21:52:48,419 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:52:48,423 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:52:48,423 - INFO - Scheduler started
+2025-05-02 21:52:48,795 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 21:52:48,796 - INFO - Start polling.
+2025-05-02 21:53:03,480 - WARNING - Unauthorized access attempt from user 1288960948
+2025-05-02 21:54:11,839 - INFO - Bot shutting down...
+2025-05-02 21:54:11,856 - INFO - Scheduler has been shut down
+2025-05-02 21:54:11,857 - INFO - Stop polling...
+2025-05-02 21:54:11,857 - WARNING - Goodbye!
+2025-05-02 21:54:18,153 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 21:54:18,435 - WARNING - Updates were skipped successfully.
+2025-05-02 21:54:18,435 - INFO - Bot starting up...
+2025-05-02 21:54:18,541 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 21:54:18,543 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 21:54:18,543 - INFO - Scheduler started
+2025-05-02 21:54:18,923 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 21:54:18,923 - INFO - Start polling.
+2025-05-02 21:54:21,424 - WARNING - Unauthorized access attempt from user 1288960948
+2025-05-02 22:00:34,619 - INFO - Bot shutting down...
+2025-05-02 22:00:34,671 - INFO - Scheduler has been shut down
+2025-05-02 22:00:34,671 - INFO - Stop polling...
+2025-05-02 22:00:34,671 - WARNING - Goodbye!
+2025-05-02 22:00:42,708 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:00:43,360 - WARNING - Updates were skipped successfully.
+2025-05-02 22:00:43,360 - INFO - Bot starting up...
+2025-05-02 22:00:43,603 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:00:43,610 - INFO - Added job "WBCategoriesBot.schedule_jobs.<locals>.<lambda>" to job store "default"
+2025-05-02 22:00:43,610 - INFO - Scheduler started
+2025-05-02 22:00:44,475 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 22:00:44,478 - INFO - Start polling.
+2025-05-02 22:04:19,379 - INFO - Bot shutting down...
+2025-05-02 22:04:19,381 - INFO - Scheduler has been shut down
+2025-05-02 22:04:19,382 - INFO - Stop polling...
+2025-05-02 22:04:19,382 - WARNING - Goodbye!
+2025-05-02 22:05:44,694 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:05:45,309 - WARNING - Updates were skipped successfully.
+2025-05-02 22:05:45,309 - INFO - Bot starting up...
+2025-05-02 22:05:45,315 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:05:45,317 - INFO - Scheduled job successfully added
+2025-05-02 22:05:45,321 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:05:45,321 - INFO - Scheduler started
+2025-05-02 22:05:46,280 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 22:05:46,280 - INFO - Start polling.
+2025-05-02 22:13:01,633 - INFO - Bot shutting down...
+2025-05-02 22:13:01,687 - INFO - Scheduler has been shut down
+2025-05-02 22:13:01,687 - INFO - Stop polling...
+2025-05-02 22:13:01,689 - WARNING - Goodbye!
+2025-05-02 22:13:14,545 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:13:20,174 - WARNING - Updates were skipped successfully.
+2025-05-02 22:13:20,174 - INFO - Bot starting up...
+2025-05-02 22:13:20,218 - INFO - Scheduler started
+2025-05-02 22:13:20,225 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:13:20,225 - INFO - Scheduled job successfully added
+2025-05-02 22:13:22,629 - ERROR - Failed to notify admin 123456789: Chat not found
+2025-05-02 22:13:22,634 - INFO - Start polling.
+2025-05-02 22:14:55,923 - INFO - Bot shutting down...
+2025-05-02 22:14:55,927 - INFO - Scheduler has been shut down
+2025-05-02 22:14:55,927 - INFO - Stop polling...
+2025-05-02 22:14:55,927 - WARNING - Goodbye!
+2025-05-02 22:15:02,574 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:15:03,029 - WARNING - Updates were skipped successfully.
+2025-05-02 22:15:03,034 - INFO - Bot starting up...
+2025-05-02 22:15:03,042 - INFO - Scheduler started
+2025-05-02 22:15:03,045 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:15:03,047 - INFO - Scheduled job successfully added
+2025-05-02 22:15:03,196 - INFO - Start polling.
+2025-05-02 22:16:09,016 - INFO - Bot shutting down...
+2025-05-02 22:16:09,078 - INFO - Scheduler has been shut down
+2025-05-02 22:16:09,078 - INFO - Stop polling...
+2025-05-02 22:16:09,078 - WARNING - Goodbye!
+2025-05-02 22:16:59,834 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:17:00,906 - WARNING - Updates were skipped successfully.
+2025-05-02 22:17:00,906 - INFO - Bot starting up...
+2025-05-02 22:17:00,906 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:17:00,906 - INFO - Scheduled job successfully added
+2025-05-02 22:17:00,914 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:17:00,914 - INFO - Scheduler started
+2025-05-02 22:17:01,843 - INFO - Start polling.
+2025-05-02 22:17:14,572 - INFO - Generating report for users: [6089511983]
+2025-05-02 22:17:15,781 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 22:17:17,492 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 22:17:20,882 - INFO - Data saved to categories.json
+2025-05-02 22:17:21,959 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 22:17:26,387 - INFO - Excel report sent to user 6089511983
+2025-05-02 22:22:52,386 - INFO - Bot shutting down...
+2025-05-02 22:22:52,389 - INFO - Scheduler has been shut down
+2025-05-02 22:22:52,389 - INFO - Stop polling...
+2025-05-02 22:22:52,391 - WARNING - Goodbye!
+2025-05-02 22:23:00,980 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:23:01,664 - WARNING - Updates were skipped successfully.
+2025-05-02 22:23:01,665 - INFO - Bot starting up...
+2025-05-02 22:23:01,707 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:23:01,708 - INFO - Scheduled job successfully added
+2025-05-02 22:23:01,709 - INFO - Jobs scheduled
+2025-05-02 22:23:01,714 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:23:01,715 - INFO - Scheduler started
+2025-05-02 22:23:01,715 - INFO - Scheduler started
+2025-05-02 22:23:01,715 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:23:01 MSK)
+2025-05-02 22:23:01,868 - INFO - Start polling.
+2025-05-02 22:23:50,718 - INFO - Bot shutting down...
+2025-05-02 22:23:50,721 - INFO - Scheduler has been shut down
+2025-05-02 22:23:50,722 - INFO - Stop polling...
+2025-05-02 22:23:50,722 - WARNING - Goodbye!
+2025-05-02 22:25:10,659 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:25:12,178 - WARNING - Updates were skipped successfully.
+2025-05-02 22:25:12,181 - INFO - Bot starting up...
+2025-05-02 22:25:12,184 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:25:12,184 - INFO - Scheduled job successfully added
+2025-05-02 22:25:12,184 - INFO - Jobs scheduled
+2025-05-02 22:25:12,187 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:25:12,187 - INFO - Scheduler started
+2025-05-02 22:25:12,187 - INFO - Scheduler started
+2025-05-02 22:25:12,187 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:25:12 +05)
+2025-05-02 22:25:12,190 - INFO - Running job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:26:12 +05)" (scheduled at 2025-05-02 22:25:12.181342+05:00)
+2025-05-02 22:25:12,190 - INFO - Generating report for users: {6089511983}
+2025-05-02 22:25:13,206 - INFO - Start polling.
+2025-05-02 22:25:14,001 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 22:25:15,797 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 22:25:17,867 - INFO - Data saved to categories.json
+2025-05-02 22:25:19,229 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 22:25:19,802 - INFO - Excel report sent to user 6089511983
+2025-05-02 22:25:19,805 - INFO - Job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:26:12 +05)" executed successfully
+2025-05-02 22:26:12,194 - INFO - Running job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:27:12 +05)" (scheduled at 2025-05-02 22:26:12.181342+05:00)
+2025-05-02 22:26:12,196 - INFO - Generating report for users: {6089511983}
+2025-05-02 22:26:13,843 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 22:26:15,039 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 22:26:17,209 - ERROR - Job "WBCategoriesBot.generate_and_send_report (trigger: interval[0:01:00], next run at: 2025-05-02 22:27:12 +05)" raised an exception
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\apscheduler\executors\base_py3.py", line 30, in run_coroutine_job
+    retval = await job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\OneDrive\Рабочий стол\wbparser\app_bot.py", line 169, in generate_and_send_report
+    evirma_data = self.parser.get_evirma_data(seo_keywords)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\OneDrive\Рабочий стол\wbparser\wb_categories_parser.py", line 95, in get_evirma_data
+    self._save_json(data, self.JSON_FILENAME)
+  File "C:\Users\nurja\OneDrive\Рабочий стол\wbparser\wb_categories_parser.py", line 102, in _save_json
+    json.dump(data, f, ensure_ascii=False, indent=4)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 386, in _iterencode_dict
+    yield _encoder(value)
+          ^^^^^^^^^^^^^^^
+KeyboardInterrupt
+2025-05-02 22:26:17,253 - INFO - Bot shutting down...
+2025-05-02 22:26:17,254 - INFO - Scheduler has been shut down
+2025-05-02 22:26:17,255 - INFO - Stop polling...
+2025-05-02 22:26:17,256 - WARNING - Goodbye!
+2025-05-02 22:30:37,399 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:30:37,606 - WARNING - Updates were skipped successfully.
+2025-05-02 22:30:37,607 - INFO - Bot starting up...
+2025-05-02 22:30:37,608 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:30:37,608 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:30:37,608 - INFO - Scheduled daily jobs at 09:00 and 15:00 Asia/Tashkent
+2025-05-02 22:30:37,608 - INFO - Jobs scheduled
+2025-05-02 22:30:37,611 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:30:37,611 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:30:37,611 - INFO - Scheduler started
+2025-05-02 22:30:37,612 - INFO - Scheduler started
+2025-05-02 22:30:37,612 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='9', minute='0'], next run at: 2025-05-03 09:00:00 +05)
+2025-05-02 22:30:37,612 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='15', minute='0'], next run at: 2025-05-03 15:00:00 +05)
+2025-05-02 22:30:37,766 - INFO - Start polling.
+2025-05-02 22:34:07,734 - INFO - Bot shutting down...
+2025-05-02 22:34:07,747 - INFO - Scheduler has been shut down
+2025-05-02 22:34:07,752 - INFO - Stop polling...
+2025-05-02 22:34:07,757 - WARNING - Goodbye!
+2025-05-02 22:34:31,111 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:34:32,115 - WARNING - Updates were skipped successfully.
+2025-05-02 22:34:32,138 - INFO - Bot starting up...
+2025-05-02 22:34:32,140 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:34:32,143 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:34:32,143 - INFO - Scheduled daily jobs at 09:00 and 15:00 Europe/Moscow
+2025-05-02 22:34:32,143 - INFO - Jobs scheduled
+2025-05-02 22:34:32,147 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:34:32,154 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:34:32,174 - INFO - Scheduler started
+2025-05-02 22:34:32,175 - INFO - Scheduler started
+2025-05-02 22:34:32,175 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='9', minute='0'], next run at: 2025-05-03 09:00:00 MSK)
+2025-05-02 22:34:32,177 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='15', minute='0'], next run at: 2025-05-03 15:00:00 MSK)
+2025-05-02 22:34:32,694 - INFO - Start polling.
+2025-05-02 22:34:44,809 - INFO - User 6089511983 unsubscribed from updates
+2025-05-02 22:34:50,758 - INFO - Generating report for users: [6089511983]
+2025-05-02 22:34:51,552 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 22:34:55,043 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 22:34:57,411 - INFO - Data saved to categories.json
+2025-05-02 22:34:58,360 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 22:34:58,797 - INFO - Excel report sent to user 6089511983
+2025-05-02 22:37:23,888 - INFO - Bot shutting down...
+2025-05-02 22:37:23,891 - INFO - Scheduler has been shut down
+2025-05-02 22:37:23,891 - INFO - Stop polling...
+2025-05-02 22:37:23,891 - WARNING - Goodbye!
+2025-05-02 22:55:38,723 - INFO - Bot: testwbanalalysisbot [@testwbanalalysis_bot]
+2025-05-02 22:55:39,541 - WARNING - Updates were skipped successfully.
+2025-05-02 22:55:39,544 - INFO - Bot starting up...
+2025-05-02 22:55:39,548 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:55:39,548 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-02 22:55:39,551 - INFO - Scheduled daily jobs at 09:00 and 15:00 Europe/Moscow
+2025-05-02 22:55:39,554 - INFO - Jobs scheduled
+2025-05-02 22:55:39,558 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:55:39,565 - INFO - Added job "WBCategoriesBot.generate_and_send_report" to job store "default"
+2025-05-02 22:55:39,565 - INFO - Scheduler started
+2025-05-02 22:55:39,566 - INFO - Scheduler started
+2025-05-02 22:55:39,566 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='9', minute='0'], next run at: 2025-05-03 09:00:00 MSK)
+2025-05-02 22:55:39,566 - INFO - Scheduled job: WBCategoriesBot.generate_and_send_report (trigger: cron[hour='15', minute='0'], next run at: 2025-05-03 15:00:00 MSK)
+2025-05-02 22:55:39,932 - INFO - Start polling.
+2025-05-02 22:55:50,064 - INFO - Generating report for users: [6089511983]
+2025-05-02 22:55:50,716 - INFO - Fetching data from https://static-basket-01.wbcontent.net/vol0/data/main-menu-uz-ru-v3.json
+2025-05-02 22:55:52,690 - INFO - Fetching data from https://evirma.ru/api/v1/keyword/list
+2025-05-02 22:55:55,457 - INFO - Data saved to categories.json
+2025-05-02 22:55:56,455 - INFO - Excel report saved to wb_categories_2025-05-02.xlsx
+2025-05-02 22:55:56,925 - INFO - Excel report sent to user 6089511983
+2025-05-02 22:56:06,573 - INFO - Bot shutting down...
+2025-05-02 22:56:06,579 - INFO - Scheduler has been shut down
+2025-05-02 22:56:06,583 - INFO - Stop polling...
+2025-05-02 22:56:06,589 - WARNING - Goodbye!
