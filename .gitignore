@@ -4,3 +4,4 @@
 output/
 venv
 .env
+__paycache__/
