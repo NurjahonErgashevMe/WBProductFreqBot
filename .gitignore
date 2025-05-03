@@ -3,5 +3,9 @@
 *.json
 output/
 venv
-.env
-__paycache__/
+
+*.env
+
+__pycache__/
+*.pyc
+*.pyo
