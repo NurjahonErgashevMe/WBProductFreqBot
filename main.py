@@ -370,8 +370,8 @@ class WBCategoriesBot:
         :param filename: Имя файла для отправки (без .xlsx)
         :param user_id: ID пользователя
         """
-        # Формируем полный путь к файлу в папке /output
-        file_path = os.path.join('output', f'{filename}.xlsx')
+        # Формируем полный путь к файлу в корневой директории
+        file_path = f'{filename}.xlsx'
         
         if not os.path.exists(file_path):
             error_msg = f"❌ Файл отчета {file_path} не найден!"

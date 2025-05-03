@@ -168,19 +168,15 @@ class WildberriesEvirmaParser:
         return parsed_data
     
     def save_to_excel(self, filename: str) -> None:
-        """Сохранение результатов в Excel файл в папке /output"""
+        """Сохранение результатов в Excel файл"""
         if not self.results:
             print("Нет данных для сохранения!")
             return
         
         df = pd.DataFrame(self.results)
         
-        # Создаём папку /output, если она не существует
-        output_dir = 'output'
-        os.makedirs(output_dir, exist_ok=True)
-        
-        # Формируем полный путь к файлу
-        file_path = os.path.join(output_dir, f'{filename}.xlsx')
+        # Формируем путь к файлу в корневой директории
+        file_path = f'{filename}.xlsx'
         
         try:
             with pd.ExcelWriter(file_path, engine='xlsxwriter') as writer:
