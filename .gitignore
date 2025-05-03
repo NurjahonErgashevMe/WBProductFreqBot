@@ -1,7 +1,7 @@
 .idea/
 *.xlsx
 *.json
-output/
+# output не /
 venv
 
 *.env
