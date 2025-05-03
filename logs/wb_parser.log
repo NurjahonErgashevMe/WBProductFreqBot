@@ -298,3 +298,191 @@
 2025-05-04 02:21:17,616 - INFO - Bot shutting down...
 2025-05-04 02:21:17,620 - INFO - Stop polling...
 2025-05-04 02:21:17,622 - WARNING - Goodbye!
+2025-05-04 02:45:26,112 - INFO - Bot: Wilberries Parser Frequency [@testwbanalalysis_bot]
+2025-05-04 02:45:26,344 - WARNING - Updates were skipped successfully.
+2025-05-04 02:45:26,344 - INFO - Bot starting up...
+2025-05-04 02:45:26,476 - INFO - Start polling.
+2025-05-04 02:45:29,976 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:45:35,390 - INFO - Bot shutting down...
+2025-05-04 02:45:35,397 - INFO - Stop polling...
+2025-05-04 02:45:35,397 - WARNING - Goodbye!
+2025-05-04 02:45:51,157 - INFO - Bot: Wilberries Parser Frequency [@testwbanalalysis_bot]
+2025-05-04 02:45:51,365 - WARNING - Updates were skipped successfully.
+2025-05-04 02:45:51,371 - INFO - Bot starting up...
+2025-05-04 02:45:51,533 - INFO - Start polling.
+2025-05-04 02:45:57,406 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:46:07,234 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:46:16,573 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:46:20,798 - INFO - Bot shutting down...
+2025-05-04 02:46:20,800 - INFO - Stop polling...
+2025-05-04 02:46:20,801 - WARNING - Goodbye!
+2025-05-04 02:46:38,341 - INFO - Bot: Wilberries Parser Frequency [@testwbanalalysis_bot]
+2025-05-04 02:46:38,545 - WARNING - Updates were skipped successfully.
+2025-05-04 02:46:38,545 - INFO - Bot starting up...
+2025-05-04 02:46:38,678 - INFO - Start polling.
+2025-05-04 02:46:42,264 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:46:51,728 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:47:01,817 - ERROR - Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 140, in make_request
+    return check_result(method, response.content_type, response.status, await response.text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\bot\api.py", line 119, in check_result
+    exceptions.ConflictError.detect(description)
+  File "C:\Users\nurja\AppData\Local\Programs\Python\Python311\Lib\site-packages\aiogram\utils\exceptions.py", line 140, in detect
+    raise err(cls.text or description)
+aiogram.utils.exceptions.TerminatedByOtherGetUpdates: Terminated by other getupdates request; make sure that only one bot instance is running
+2025-05-04 02:47:02,003 - INFO - Bot shutting down...
+2025-05-04 02:47:02,006 - INFO - Stop polling...
+2025-05-04 02:47:02,007 - WARNING - Goodbye!
+2025-05-04 02:53:24,788 - INFO - Bot: testikkkkkkbor [@testwbbotforfreqtstbot]
+2025-05-04 02:53:24,992 - WARNING - Updates were skipped successfully.
+2025-05-04 02:53:24,992 - INFO - Bot starting up...
+2025-05-04 02:53:25,112 - ERROR - Failed to notify admin 6089511983: Chat not found
+2025-05-04 02:53:25,113 - INFO - Start polling.
+2025-05-04 02:53:35,910 - INFO - Found category: Аксессуары
+2025-05-04 02:53:36,266 - INFO - Страница 1: получено 100 товаров
+2025-05-04 02:53:36,268 - INFO - Страница 1: получено 100 товаров
+2025-05-04 02:53:37,927 - INFO - Saved JSON to output\evirma.json
+2025-05-04 02:53:39,285 - INFO - Страница 2: получено 100 товаров
+2025-05-04 02:53:39,286 - INFO - Страница 2: получено 100 товаров
+2025-05-04 02:53:39,900 - INFO - Saved JSON to output\evirma.json
+2025-05-04 02:53:41,048 - INFO - Saved Excel to output\Аксессуары_analysis_1746309220.xlsx
+2025-05-04 02:53:41,305 - INFO - Excel report sent to user 6089511983: output\Аксессуары_analysis_1746309220.xlsx
+2025-05-04 02:53:41,306 - INFO - Parsing finished: no more products. Saved 78 items
+2025-05-04 02:53:41,306 - INFO - Total parsing time: 5.72 seconds
+2025-05-04 02:53:56,318 - INFO - File deleted: output\Аксессуары_analysis_1746309220.xlsx
+2025-05-04 02:54:00,872 - INFO - Bot shutting down...
+2025-05-04 02:54:00,874 - INFO - Stop polling...
+2025-05-04 02:54:00,875 - WARNING - Goodbye!
+2025-05-04 02:54:04,251 - INFO - Bot: testikkkkkkbor [@testwbbotforfreqtstbot]
+2025-05-04 02:54:04,452 - WARNING - Updates were skipped successfully.
+2025-05-04 02:54:04,454 - INFO - Bot starting up...
+2025-05-04 02:54:04,602 - INFO - Start polling.
+2025-05-04 02:54:21,875 - INFO - Found category: Аксессуары
+2025-05-04 02:54:22,211 - INFO - Страница 1: получено 100 товаров
+2025-05-04 02:54:22,212 - INFO - Страница 1: получено 100 товаров
+2025-05-04 02:54:24,027 - INFO - Страница 2: получено 100 товаров
+2025-05-04 02:54:24,028 - INFO - Страница 2: получено 100 товаров
+2025-05-04 02:54:25,592 - INFO - Saved Excel to output\Аксессуары_analysis_1746309265.xlsx
+2025-05-04 02:54:25,811 - INFO - Excel report sent to user 6089511983: output\Аксессуары_analysis_1746309265.xlsx
+2025-05-04 02:54:25,811 - INFO - Parsing finished: no more products. Saved 77 items
+2025-05-04 02:54:25,811 - INFO - Total parsing time: 4.27 seconds
+2025-05-04 02:54:40,810 - INFO - File deleted: output\Аксессуары_analysis_1746309265.xlsx
