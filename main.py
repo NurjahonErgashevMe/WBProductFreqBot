@@ -1,20 +1,19 @@
 import asyncio
-import datetime
 import logging
 import os
 import sys
-from typing import List, Optional, Set, Union
+import re
+from typing import List, Union
+import time
+import datetime
 
-import aiohttp
-import pandas as pd
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from dotenv import load_dotenv
+import requests
 
-from wb_categories_parser import WBCategoriesParser
-from pytz import timezone
-from apscheduler.triggers.cron import CronTrigger
+from wildberries import WildberriesEvirmaParser
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -42,17 +41,15 @@ class WBCategoriesBot:
         self.config = BotConfig()
         self.bot = Bot(token=self.config.token)
         self.dp = Dispatcher(self.bot)
-        self.scheduler = AsyncIOScheduler(timezone="Europe/Moscow")
-        self.scheduler.add_jobstore('memory')  # Добавляем хранилище заданий
-        self.parser = WBCategoriesParser()
-        self.current_users = set(self.config.admin_ids)  # Автоподписка админов
+        self.parser = WildberriesEvirmaParser()
+        self.waiting_for_url = {}  # Словарь для отслеживания пользователей, ожидающих ввода URL
+        self.log_messages = {}  # Словарь для хранения message_id и текста логов для каждого пользователя
 
         # Регистрация обработчиков только для админов
         self.dp.register_message_handler(self.start, commands=["start"], user_id=self.config.admin_ids)
-        self.dp.register_message_handler(self.subscribe, commands=["subscribe"], user_id=self.config.admin_ids)
-        self.dp.register_message_handler(self.unsubscribe, commands=["unsubscribe"], user_id=self.config.admin_ids)
-        self.dp.register_message_handler(self.manual_update, commands=["update"], user_id=self.config.admin_ids)
-        self.dp.register_message_handler(self.list_subscribers, commands=["list"], user_id=self.config.admin_ids)
+        self.dp.register_message_handler(self.list_admins, commands=["list"], user_id=self.config.admin_ids)
+        self.dp.register_message_handler(self.manual_parse, commands=["parse"], user_id=self.config.admin_ids)
+        self.dp.register_message_handler(self.handle_text, user_id=self.config.admin_ids)
         
         # Обработчик для всех остальных сообщений от неадминов
         self.dp.register_message_handler(self.unauthorized_access)
@@ -61,225 +58,362 @@ class WBCategoriesBot:
         """Обработчик для неавторизованных пользователей"""
         user_id = message.from_user.id
         logger.warning(f"Unauthorized access attempt from user {user_id}")
-        # Не отвечаем ничего неавторизованным пользователям
+        await message.answer("❌ У вас нет доступа к этому боту.", parse_mode="Markdown")
+
+    def get_main_menu(self, user_id: int) -> ReplyKeyboardMarkup:
+        """Создание главного меню с кнопками"""
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+        keyboard.add(KeyboardButton("Парсить"))
+        if user_id in self.config.admin_ids:
+            keyboard.add(KeyboardButton("Список подписчиков"))
+        return keyboard
+
+    def get_url_input_menu(self) -> ReplyKeyboardMarkup:
+        """Создание меню для ввода URL с кнопкой Отмена"""
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+        keyboard.add(KeyboardButton("Отмена"))
+        return keyboard
 
     async def start(self, message: types.Message):
         """Обработчик команды /start"""
+        user_id = message.from_user.id
         welcome_text = (
             "🛍️ *Wildberries Categories Analyzer Bot*\n\n"
-            "Этот бот автоматически анализирует категории Wildberries "
-            "и предоставляет актуальную статистику.\n\n"
+            "Этот бот анализирует категории Wildberries и предоставляет статистику.\n\n"
             "Доступные команды:\n"
-            "/subscribe - Подписаться на автоматические обновления\n"
-            "/unsubscribe - Отписаться от обновлений\n"
-            "/update - Запросить обновление вручную\n\n"
-            "Данные обновляются в 09:00 и 15:00 по Москве."
+            "/parse - Запросить анализ категории\n"
+            "/list - Показать список админов (только для админов)"
         )
-        await message.answer(welcome_text, parse_mode="Markdown")
+        await message.answer(welcome_text, parse_mode="Markdown", reply_markup=self.get_main_menu(user_id))
 
-    async def subscribe(self, message: types.Message):
-        """Подписка пользователя на обновления"""
+    async def list_admins(self, message: types.Message):
+        """Показать список админов (только для админов)"""
+        admins = "\n".join([f"- {admin_id}" for admin_id in self.config.admin_ids])
+        await message.answer(f"📋 Список админов:\n{admins}", reply_markup=self.get_main_menu(message.from_user.id))
+
+    async def manual_parse(self, message: types.Message):
+        """Ручной запрос парсинга"""
         user_id = message.from_user.id
-        if user_id in self.current_users:
-            await message.answer("ℹ️ Вы уже подписаны на обновления.")
-            return
-
-        self.current_users.add(user_id)
-        logger.info(f"User {user_id} subscribed to updates")
+        self.waiting_for_url[user_id] = 'manual'
         await message.answer(
-            "✅ Вы успешно подписались на обновления!\n"
-            "Теперь вы будете получать свежие отчеты автоматически."
+            "🔗 Пожалуйста, отправьте URL категории Wildberries в формате:\n"
+            "https://www.wildberries.ru/catalog/<category>/<subcategory>/<subsubcategory>\n"
+            "Например: https://www.wildberries.ru/catalog/dom-i-dacha/vannaya/aksessuary",
+            parse_mode="Markdown",
+            reply_markup=self.get_url_input_menu()
         )
 
-    async def unsubscribe(self, message: types.Message):
-        """Отписка пользователя от обновлений"""
+    async def handle_text(self, message: types.Message):
+        """Обработка текстовых сообщений"""
         user_id = message.from_user.id
-        if user_id not in self.current_users:
-            await message.answer("ℹ️ Вы не были подписаны на обновления.")
+        text = message.text.strip()
+
+        if text == "Парсить":
+            await self.manual_parse(message)
+            return
+        elif text == "Список подписчиков":
+            await self.list_admins(message)
+            return
+        elif text == "Отмена" and user_id in self.waiting_for_url:
+            del self.waiting_for_url[user_id]
+            await message.answer(
+                "❌ Ввод URL отменён.",
+                parse_mode="Markdown",
+                reply_markup=self.get_main_menu(user_id)
+            )
             return
 
-        self.current_users.remove(user_id)
-        logger.info(f"User {user_id} unsubscribed from updates")
-        await message.answer("❌ Вы отписались от обновлений.")
+        # Обработка ввода URL
+        if user_id in self.waiting_for_url:
+            url = text
 
-    async def list_subscribers(self, message: types.Message):
-        """Показать список подписчиков (только для админов)"""
-        subscribers = "\n".join([f"- {user_id}" for user_id in self.current_users])
-        await message.answer(f"📋 Список подписчиков:\n{subscribers}")
+            # Проверка формата URL
+            url_pattern = r'^https://www\.wildberries\.ru/catalog/[\w-]+/[\w-]+/[\w-]+$'
+            if not re.match(url_pattern, url):
+                await message.answer(
+                    "❌ Ошибка: URL некорректен. Пожалуйста, используйте формат:\n"
+                    "https://www.wildberries.ru/catalog/<category>/<subcategory>/<subsubcategory>\n"
+                    "Например: https://www.wildberries.ru/catalog/dom-i-dacha/vannaya/aksessuary\n\n"
+                    "Попробуйте снова или нажмите 'Отмена'.",
+                    parse_mode="Markdown",
+                    reply_markup=self.get_url_input_menu()
+                )
+                return
 
-    async def manual_update(self, message: types.Message):
-        """Ручной запрос обновления данных"""
-        user_id = message.from_user.id
-        await message.answer("🔄 Запускаю обновление данных вручную...")
-        await self.generate_and_send_report(single_user_id=user_id)
+            await message.answer("🔄 Запускаю анализ категории...", reply_markup=self.get_url_input_menu())
+            success = await self.generate_and_send_report(user_id=user_id, category_url=url)
+            if success:
+                # Если парсинг успешен, выходим из режима ввода URL
+                del self.waiting_for_url[user_id]
+                await message.answer(
+                    "✅ Парсинг завершён.",
+                    parse_mode="Markdown",
+                    reply_markup=self.get_main_menu(user_id)
+                )
+            else:
+                # Если категория не найдена, продолжаем ожидать URL
+                await message.answer(
+                    "❌ Ошибка: Категория не найдена или URL некорректен. Пожалуйста, используйте формат:\n"
+                    "https://www.wildberries.ru/catalog/<category>/<subcategory>/<subsubcategory>\n"
+                    "Например: https://www.wildberries.ru/catalog/dom-i-dacha/vannaya/aksessuary\n\n"
+                    "Попробуйте снова или нажмите 'Отмена'.",
+                    parse_mode="Markdown",
+                    reply_markup=self.get_url_input_menu()
+                )
 
-    async def send_status(self, text: str, markdown: bool = False, user_ids: Union[List[int], Set[int], None] = None):
+    async def send_status(self, text: str, user_id: int, markdown: bool = False):
         """
-        Отправка статуса пользователям
+        Отправка статуса пользователю
         
         :param text: Текст сообщения
+        :param user_id: ID пользователя
         :param markdown: Использовать ли Markdown
-        :param user_ids: ID пользователей для отправки (если None, отправка всем подписчикам)
         """
-        if user_ids is None:
-            user_ids = self.current_users
+        logger.info(f"Sending status to user {user_id}: {text}")
+        try:
+            if markdown or ("*" in text or "_" in text):
+                await self.bot.send_message(user_id, text, parse_mode="Markdown")
+            else:
+                await self.bot.send_message(user_id, text)
+        except Exception as e:
+            logger.error(f"Failed to send status to user {user_id}: {e}")
+
+    async def update_log_message(self, user_id: int, log_message: str):
+        """
+        Обновление сообщения с логами для пользователя
         
-        if not user_ids:
-            logger.warning("No users to send status to.")
-            return
-
-        logger.info(f"Sending status to {len(user_ids)} users: {text}")
-        for user_id in user_ids:
+        :param user_id: ID пользователя
+        :param log_message: Новая строка лога для добавления
+        """
+        if user_id not in self.log_messages:
+            # Отправляем новое сообщение
+            message = await self.bot.send_message(user_id, f"📄 *Логи парсинга:*\n{log_message}", parse_mode="Markdown")
+            self.log_messages[user_id] = {'message_id': message.message_id, 'text': [log_message]}
+        else:
+            # Обновляем существующее сообщение
+            current_logs = self.log_messages[user_id]['text']
+            current_logs.append(log_message)
+            new_text = "📄 *Логи парсинга:*\n" + "\n".join(current_logs)
             try:
-                if markdown or ("*" in text or "_" in text):
-                    await self.bot.send_message(user_id, text, parse_mode="Markdown")
-                else:
-                    await self.bot.send_message(user_id, text)
+                await self.bot.edit_message_text(
+                    chat_id=user_id,
+                    message_id=self.log_messages[user_id]['message_id'],
+                    text=new_text,
+                    parse_mode="Markdown"
+                )
+                self.log_messages[user_id]['text'] = current_logs
             except Exception as e:
-                logger.error(f"Failed to send status to user {user_id}: {e}")
+                logger.error(f"Failed to update log message for user {user_id}: {e}")
 
-    async def generate_and_send_report(self, single_user_id=None):
+    async def clear_log_messages(self, user_id: int):
+        """
+        Очистка логов для указанного пользователя
+        
+        :param user_id: ID пользователя
+        """
+        if user_id in self.log_messages:
+            del self.log_messages[user_id]
+
+    async def generate_and_send_report(self, user_id: int, category_url: str) -> bool:
         """
         Генерация и отправка отчета
         
-        :param single_user_id: Если указан, отправить отчет только этому пользователю.
-                              Если None и есть подписчики, отправить всем подписчикам.
+        :param user_id: ID пользователя, которому отправляется отчет
+        :param category_url: URL категории для парсинга
+        :return: True, если парсинг успешен, False, если категория не найдена
         """
-        # Если указан конкретный пользователь, отправляем только ему
-        # Иначе отправляем всем текущим подписчикам
-        recipients = [single_user_id] if single_user_id else self.current_users
-        logger.info(f"Generating report for users: {recipients}")
+        logger.info(f"Generating report for user {user_id}, category: {category_url}")
         
         try:
             # Статус: Начало работы
-            await self.send_status("🟢 *Начинаем работу*", markdown=True, user_ids=recipients)
+            await self.send_status("🟢 *Начинаем анализ категории*", user_id=user_id, markdown=True)
 
-            # Получаем категории
-            await self.send_status("📋 *Получаем категории с Wildberries...*", markdown=True, user_ids=recipients)
-            categories = self.parser.get_wb_categories()
+            # Сбрасываем результаты парсера перед новой категорией
+            self.parser.results = []
             
-            # Извлекаем иерархию
-            await self.send_status("🧩 *Обрабатываем иерархию категорий...*", markdown=True, user_ids=recipients)
-            category_hierarchy = self.parser.extract_category_hierarchy(categories)
-            
-            # Получаем SEO ключи
-            seo_keywords = [cat["SEO"] for cat in category_hierarchy if cat["SEO"]]
-            
-            # Запрашиваем данные с Evirma API
-            await self.send_status("📡 *Отправляем запрос к Evirma API...*", markdown=True, user_ids=recipients)
-            evirma_data = self.parser.get_evirma_data(seo_keywords)
-            
-            # Объединяем данные
-            await self.send_status("🔗 *Объединяем данные...*", markdown=True, user_ids=recipients)
-            merged_data = self.parser.merge_data(category_hierarchy, evirma_data)
-            
-            # Сохраняем в Excel
-            today = datetime.datetime.now().strftime("%Y-%m-%d")
-            filename = f"wb_categories_{today}.xlsx"
-            await self.send_status("💾 *Сохраняем отчет в Excel...*", markdown=True, user_ids=recipients)
-            self.parser.save_to_excel(merged_data, filename)
-            
-            # Отправляем файл пользователям
-            await self.send_status("✅ *Отчет успешно сформирован!*", markdown=True, user_ids=recipients)
-            await self.send_excel_to_users(filename, user_ids=recipients)
-            
+            # Модифицированный парсинг с отправкой логов
+            start_time = time.time()
+            try:
+                category = self.parser.find_category_by_url(category_url)
+                if not category:
+                    return False
+                
+                for page in range(1, self.parser.MAX_PAGES + 1):
+                    wb_data, log_message = self.parser.scrape_wb_page(page=page, category=category)
+                    await self.update_log_message(user_id, log_message)
+                    
+                    products = self.parser.process_products(wb_data)
+                    if not products:
+                        await self.send_status(
+                            f"Страница {page}: товары не найдены, завершаем парсинг.",
+                            user_id=user_id,
+                            markdown=True
+                        )
+                        if self.parser.results:
+                            filename = f"{category['name']}_analysis_{int(time.time())}"
+                            self.parser.save_to_excel(filename)
+                            await self.send_excel_to_user(filename, user_id)
+                        break
+                    
+                    evirma_response = self.parser.query_evirma_api(products)
+                    if evirma_response is None:
+                        if self.parser.results:
+                            filename = f"{category['name']}_analysis_{int(time.time())}"
+                            self.parser.save_to_excel(filename)
+                            await self.send_excel_to_user(filename, user_id)
+                        else:
+                            await self.send_status(
+                                "Товары не найдены по заданным критериям.",
+                                user_id=user_id,
+                                markdown=True
+                            )
+                        break
+                    
+                    page_results = self.parser.parse_evirma_response(evirma_response)
+                    self.parser.results.extend(page_results)
+                    
+                    await asyncio.sleep(1)
+                
+                if self.parser.results:
+                    filename = f"{category['name']}_analysis_{int(time.time())}"
+                    self.parser.save_to_excel(filename)
+                    await self.send_status(
+                        f"Парсинг завершён: товары закончились. Сохранено {len(self.parser.results)} товаров",
+                        user_id=user_id,
+                        markdown=True
+                    )
+                    await self.send_excel_to_user(filename, user_id)
+                else:
+                    await self.send_status(
+                        "Товары не найдены по заданным критериям.",
+                        user_id=user_id,
+                        markdown=True
+                    )
+                
+                return True
+                
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 429:
+                    await self.send_status(
+                        "ℹ️ Максимум товаров спарсены.",
+                        user_id=user_id,
+                        markdown=True
+                    )
+                    if self.parser.results:
+                        filename = f"{category['name']}_analysis_{int(time.time())}"
+                        self.parser.save_to_excel(filename)
+                        await self.send_status(
+                            f"Парсинг завершён: максимум товаров спарсены. Сохранено {len(self.parser.results)} товаров",
+                            user_id=user_id,
+                            markdown=True
+                        )
+                        await self.send_excel_to_user(filename, user_id)
+                    return True
+                else:
+                    error_msg = f"❌ Ошибка во время парсинга: {str(e)}"
+                    await self.send_status(error_msg, user_id=user_id, markdown=True)
+                    if self.parser.results:
+                        filename = f"{category['name']}_analysis_{int(time.time())}"
+                        self.parser.save_to_excel(filename)
+                        await self.send_status(
+                            f"Парсинг завершён из-за ошибки. Сохранено {len(self.parser.results)} товаров",
+                            user_id=user_id,
+                            markdown=True
+                        )
+                        await self.send_excel_to_user(filename, user_id)
+                    return True
+            except Exception as e:
+                error_msg = f"❌ Ошибка во время парсинга: {str(e)}"
+                await self.send_status(error_msg, user_id=user_id, markdown=True)
+                if self.parser.results:
+                    filename = f"{category['name']}_analysis_{int(time.time())}"
+                    self.parser.save_to_excel(filename)
+                    await self.send_status(
+                        f"Парсинг завершён из-за ошибки. Сохранено {len(self.parser.results)} товаров",
+                        user_id=user_id,
+                        markdown=True
+                    )
+                    await self.send_excel_to_user(filename, user_id)
+                return True
+            finally:
+                elapsed_time = time.time() - start_time
+                await self.send_status(
+                    f"Общее время работы: {elapsed_time:.2f} секунд",
+                    user_id=user_id,
+                    markdown=True
+                )
+
         except Exception as e:
             error_msg = f"❌ *Ошибка при формировании отчета:*\n`{str(e)}`"
-            await self.send_status(error_msg, markdown=True, user_ids=recipients)
+            await self.send_status(error_msg, user_id=user_id, markdown=True)
             logger.exception("Error generating report")
+            return False
+        finally:
+            await self.clear_log_messages(user_id)
 
-    async def send_excel_to_users(self, filename: str, user_ids: Union[List[int], Set[int], None] = None):
+    async def delete_file_after_delay(self, file_path: str):
+        """Удаление файла через 15 секунд"""
+        await asyncio.sleep(15)
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"File deleted: {file_path}")
+            else:
+                logger.warning(f"File not found for deletion: {file_path}")
+        except Exception as e:
+            logger.error(f"Failed to delete file {file_path}: {e}")
+
+    async def send_excel_to_user(self, filename: str, user_id: int):
         """
-        Отправка Excel-файла пользователям
+        Отправка Excel-файла пользователю с последующим удалением через 15 секунд
         
-        :param filename: Имя файла для отправки
-        :param user_ids: ID пользователей для отправки (если None, отправка всем подписчикам)
+        :param filename: Имя файла для отправки (без .xlsx)
+        :param user_id: ID пользователя
         """
-        if user_ids is None:
-            user_ids = self.current_users
-            
-        if not user_ids:
-            logger.warning("No users to send Excel to.")
-            return
-
-        if not os.path.exists(filename):
-            error_msg = f"❌ Файл отчета {filename} не найден!"
-            await self.send_status(error_msg, markdown=True, user_ids=user_ids)
+        # Формируем полный путь к файлу в папке /output
+        file_path = os.path.join('output', f'{filename}.xlsx')
+        
+        if not os.path.exists(file_path):
+            error_msg = f"❌ Файл отчета {file_path} не найден!"
+            await self.send_status(error_msg, user_id=user_id, markdown=True)
             logger.error(error_msg)
             return
 
         today = datetime.datetime.now().strftime("%d.%m.%Y")
-        caption = f"📊 *Анализ категорий Wildberries* ({today})"
+        caption = f"📊 *Анализ категории Wildberries* ({today})"
 
-        for user_id in user_ids:
-            try:
-                with open(filename, "rb") as file:
-                    await self.bot.send_document(
-                        user_id,
-                        types.InputFile(file, filename),
-                        caption=caption,
-                        parse_mode="Markdown"
-                    )
-                logger.info(f"Excel report sent to user {user_id}")
-            except Exception as e:
-                logger.error(f"Failed to send Excel to user {user_id}: {e}")
-
-
-    def schedule_jobs(self):
         try:
-            self.scheduler.add_job(
-                self.generate_and_send_report,
-                trigger='cron',
-                hour=9,
-                minute=0,
-                args=[None],
-                id="daily_morning_report",
-                replace_existing=True
-            )
-            self.scheduler.add_job(
-                self.generate_and_send_report,
-                trigger='cron',
-                hour=15,
-                minute=0,
-                args=[None],
-                id="daily_afternoon_report",
-                replace_existing=True
-            )
-            logger.info("Scheduled daily jobs at 09:00 and 15:00 Europe/Moscow")
+            with open(file_path, "rb") as file:
+                await self.bot.send_document(
+                    user_id,
+                    types.InputFile(file, f'{filename}.xlsx'),
+                    caption=caption,
+                    parse_mode="Markdown"
+                )
+            logger.info(f"Excel report sent to user {user_id}: {file_path}")
+            # Запускаем задачу удаления файла через 15 секунд
+            asyncio.create_task(self.delete_file_after_delay(file_path))
         except Exception as e:
-            logger.error(f"Failed to schedule job: {e}")
-
+            logger.error(f"Failed to send Excel to user {user_id}: {e}")
 
     async def on_startup(self, _):
         logger.info("Bot starting up...")
-        self.schedule_jobs()
-        logger.info("Jobs scheduled")
-        self.scheduler.start()
-        logger.info("Scheduler started")
-
-        # Показываем список задач
-        for job in self.scheduler.get_jobs():
-            logger.info(f"Scheduled job: {job}")
-
         # Уведомление админов
         for admin_id in self.config.admin_ids:
             try:
                 await self.bot.send_message(
                     admin_id,
                     "🤖 *Бот запущен и готов к работе!*\n"
-                    f"Обновления выполняются ежедневно в 09:00 и 15:00 по Москве.\n"
                     f"Ваш ID: {admin_id}\n"
-                    "Используйте /subscribe для получения обновлений.",
+                    "Используйте /start для начала работы.",
                     parse_mode="Markdown"
                 )
             except Exception as e:
                 logger.error(f"Failed to notify admin {admin_id}: {e}")
 
-
     async def on_shutdown(self, _):
         """Действия при остановке бота"""
         logger.info("Bot shutting down...")
-        self.scheduler.shutdown()
         await self.bot.close()
 
     def run(self):

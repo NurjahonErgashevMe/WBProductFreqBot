@@ -1,8 +1,8 @@
 import requests
 import pandas as pd
 from typing import List, Dict, Optional
-from retry import retry
 import time
+import os
 
 class WildberriesEvirmaParser:
     """
@@ -73,8 +73,7 @@ class WildberriesEvirmaParser:
                 return category
         return None
     
-    @retry(Exception, tries=3, delay=2)
-    def scrape_wb_page(self, page: int, category: Dict) -> Optional[Dict]:
+    def scrape_wb_page(self, page: int, category: Dict) -> tuple[Dict, str]:
         """Парсинг страницы товаров Wildberries"""
         url = (
             f'https://catalog.wb.ru/catalog/{category["shard"]}/catalog?appType=1&curr=rub'
@@ -82,20 +81,15 @@ class WildberriesEvirmaParser:
             f'&sort=popular&spp=0&{category["query"]}'
         )
         
-        try:
-            response = requests.get(url, headers=self.HEADERS)
-            response.raise_for_status()
-            
-            products_count = len(response.json().get("data", {}).get("products", []))
-            print(f'Страница {page}: получено {products_count} товаров')
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-            if e.response.status_code == 429:
-                print(f"Ошибка 429 на странице {page}: товары закончились")
-                return None
-            raise
+        response = requests.get(url, headers=self.HEADERS)
+        response.raise_for_status()
+        
+        data = response.json()
+        products_count = len(data.get("data", {}).get("products", []))
+        log_message = f"Страница {page}: получено {products_count} товаров"
+        print(log_message)
+        return data, log_message
     
-    @retry(Exception, tries=3, delay=2)
     def query_evirma_api(self, keywords: List[str]) -> Optional[Dict]:
         """Запрос к Evirma API для анализа ключевых слов"""
         payload = {
@@ -174,15 +168,22 @@ class WildberriesEvirmaParser:
         return parsed_data
     
     def save_to_excel(self, filename: str) -> None:
-        """Сохранение результатов в Excel файл"""
+        """Сохранение результатов в Excel файл в папке /output"""
         if not self.results:
             print("Нет данных для сохранения!")
             return
         
         df = pd.DataFrame(self.results)
         
+        # Создаём папку /output, если она не существует
+        output_dir = 'output'
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Формируем полный путь к файлу
+        file_path = os.path.join(output_dir, f'{filename}.xlsx')
+        
         try:
-            with pd.ExcelWriter(f'{filename}.xlsx', engine='xlsxwriter') as writer:
+            with pd.ExcelWriter(file_path, engine='xlsxwriter') as writer:
                 df.to_excel(writer, sheet_name='data', index=False)
                 
                 # Get the xlsxwriter workbook and worksheet objects
@@ -194,7 +195,7 @@ class WildberriesEvirmaParser:
                 worksheet.set_column('B:B', 25)  # Column B width = 25
                 worksheet.set_column('C:C', 25)  # Column C width = 25
             
-            print(f"Данные сохранены в файл: {filename}.xlsx")
+            print(f"Данные сохранены в файл: {file_path}")
         except Exception as e:
             print(f"Ошибка при сохранении в Excel: {e}")
     
@@ -212,17 +213,7 @@ class WildberriesEvirmaParser:
             # Парсим страницы
             for page in range(1, self.MAX_PAGES + 1):
                 # Получаем данные со страницы Wildberries
-                wb_data = self.scrape_wb_page(page=page, category=category)
-                
-                # Если товары закончились (ошибка 429)
-                if wb_data is None:
-                    if self.results:
-                        filename = f"{category['name']}_analysis_{int(time.time())}"
-                        self.save_to_excel(filename)
-                        print(f"\nПарсинг завершён: товары закончились. Сохранено {len(self.results)} товаров")
-                    else:
-                        print("\nТовары не найдены по заданным критериям.")
-                    break
+                wb_data, log_message = self.scrape_wb_page(page=page, category=category)
                 
                 products = self.process_products(wb_data)
                 if not products:
@@ -263,34 +254,10 @@ class WildberriesEvirmaParser:
                 
         except Exception as e:
             print(f"\nОшибка во время парсинга: {str(e)}")
+            if self.results:
+                filename = f"{category['name']}_analysis_{int(time.time())}"
+                self.save_to_excel(filename)
+                print(f"\nПарсинг завершён из-за ошибки. Сохранено {len(self.results)} товаров")
         finally:
             elapsed_time = time.time() - start_time
             print(f"\nОбщее время работы: {elapsed_time:.2f} секунд")
-
-def main():
-    """Интерактивный режим работы с парсером"""
-    print("Парсер Wildberries + Evirma API")
-    print("------------------------------\n")
-    
-    parser = WildberriesEvirmaParser()
-    
-    while True:
-        try:
-            url = input('Введите URL категории Wildberries (или "q" для выхода):\n').strip()
-            if url.lower() == 'q':
-                break
-                
-            if 'wildberries.ru' not in url:
-                print("Ошибка: URL должен быть с домена wildberries.ru")
-                continue
-                
-            parser.parse_category(url)
-            
-        except KeyboardInterrupt:
-            print("\nРабота прервана пользователем")
-            break
-        except Exception as e:
-            print(f"Неожиданная ошибка: {str(e)}")
-
-if __name__ == '__main__':
-    main()
