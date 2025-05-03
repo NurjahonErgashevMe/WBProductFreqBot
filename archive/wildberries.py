@@ -115,9 +115,6 @@ class WildberriesEvirmaParser:
         if not filtered_data["data"]["keywords"]:
             return None
         
-        # Сохраняем отфильтрованные данные в JSON файл
-        self.save_to_json(filtered_data)
-        
         return filtered_data
 
     def save_to_json(self, data: Dict) -> None:
